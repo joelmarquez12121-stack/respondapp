@@ -1,0 +1,297 @@
+-- RESPONDAPP: estructura y datos de prueba. Ejecutar en una base vacia.
+-- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
+--
+-- Host: 127.0.0.1    Database: respondapp_basico
+-- ------------------------------------------------------
+-- Server version	10.4.32-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `respondapp_basico`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `respondapp_basico` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
+USE `respondapp_basico`;
+
+--
+-- Table structure for table `categoria`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoria` (
+  `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(60) NOT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_categoria`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` (`id_categoria`, `nombre`, `descripcion`) VALUES (1,'Deportes','Preguntas sobre deportes y sus reglas.'),(2,'Ciencia','Ciencia, matematica y naturaleza.'),(3,'Geografia','Paises, capitales y continentes.');
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `opcion`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opcion` (
+  `id_opcion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pregunta` int(11) DEFAULT NULL,
+  `numero` tinyint(4) NOT NULL,
+  `texto` varchar(250) NOT NULL,
+  PRIMARY KEY (`id_opcion`),
+  UNIQUE KEY `id_pregunta` (`id_pregunta`,`numero`),
+  CONSTRAINT `opcion_ibfk_1` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`numero` between 1 and 4)
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `opcion`
+--
+
+LOCK TABLES `opcion` WRITE;
+/*!40000 ALTER TABLE `opcion` DISABLE KEYS */;
+INSERT INTO `opcion` (`id_opcion`, `id_pregunta`, `numero`, `texto`) VALUES (1,1,1,'5'),(2,1,2,'7'),(3,1,3,'15'),(4,1,4,'11'),(5,2,1,'Natacion'),(6,2,2,'Boxeo'),(7,2,3,'Tenis'),(8,2,4,'Futbol'),(9,3,1,'Golf'),(10,3,2,'Basquetbol'),(11,3,3,'Voleibol'),(12,3,4,'Rugby'),(13,4,1,'5'),(14,4,2,'6'),(15,4,3,'7'),(16,4,4,'11'),(17,5,1,'Argentina'),(18,5,2,'Brasil'),(19,5,3,'Italia'),(20,5,4,'Uruguay'),(21,6,1,'7'),(22,6,2,'8'),(23,6,3,'6'),(24,6,4,'5'),(25,7,1,'120'),(26,7,2,'90'),(27,7,3,'60'),(28,7,4,'45'),(29,8,1,'64'),(30,8,2,'32'),(31,8,3,'100'),(32,8,4,'81'),(33,9,1,'Londres'),(34,9,2,'Tokio'),(35,9,3,'Atenas'),(36,9,4,'Rio de Janeiro'),(37,10,1,'Solamente rodillas'),(38,10,2,'Solamente hombros'),(39,10,3,'Manos'),(40,10,4,'Solamente cabeza'),(41,11,1,'6'),(42,11,2,'4'),(43,11,3,'3'),(44,11,4,'5'),(45,12,1,'Tierra'),(46,12,2,'Marte'),(47,12,3,'Venus'),(48,12,4,'Jupiter'),(49,13,1,'CO2'),(50,13,2,'O2'),(51,13,3,'NaCl'),(52,13,4,'H2O'),(53,14,1,'Higado'),(54,14,2,'Estomago'),(55,14,3,'Corazon'),(56,14,4,'Pulmon'),(57,15,1,'142'),(58,15,2,'144'),(59,15,3,'124'),(60,15,4,'122'),(61,16,1,'Newton'),(62,16,2,'Metro'),(63,16,3,'Segundo'),(64,16,4,'Kelvin'),(65,17,1,'Venus'),(66,17,2,'Saturno'),(67,17,3,'Neptuno'),(68,17,4,'Marte'),(69,18,1,'7'),(70,18,2,'8'),(71,18,3,'6'),(72,18,4,'5'),(73,19,1,'O'),(74,19,2,'Au'),(75,19,3,'Ag'),(76,19,4,'Fe'),(77,20,1,'9'),(78,20,2,'8'),(79,20,3,'7'),(80,20,4,'6'),(81,21,1,'Salto'),(82,21,2,'Paysandu'),(83,21,3,'Rivera'),(84,21,4,'Montevideo'),(85,22,1,'Africa'),(86,22,2,'Asia'),(87,22,3,'America'),(88,22,4,'Europa'),(89,23,1,'Mendoza'),(90,23,2,'Buenos Aires'),(91,23,3,'Cordoba'),(92,23,4,'Rosario'),(93,24,1,'Atlantico'),(94,24,2,'Pacifico'),(95,24,3,'Indico'),(96,24,4,'Artico'),(97,25,1,'Rio de Janeiro'),(98,25,2,'San Pablo'),(99,25,3,'Salvador'),(100,25,4,'Brasilia'),(101,26,1,'Oceania'),(102,26,2,'America'),(103,26,3,'Africa'),(104,26,4,'Europa'),(105,27,1,'Perth'),(106,27,2,'Canberra'),(107,27,3,'Sidney'),(108,27,4,'Melbourne'),(109,28,1,'Tokio'),(110,28,2,'Kioto'),(111,28,3,'Osaka'),(112,28,4,'Hiroshima'),(113,29,1,'Canada'),(114,29,2,'China'),(115,29,3,'Brasil'),(116,29,4,'Rusia'),(117,30,1,'Peru'),(118,30,2,'Colombia'),(119,30,3,'Brasil'),(120,30,4,'Chile'),(121,NULL,1,'Opcion de reserva sin pregunta');
+/*!40000 ALTER TABLE `opcion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `partida`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `partida` (
+  `id_partida` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jugador1` int(11) NOT NULL,
+  `id_jugador2` int(11) NOT NULL,
+  `id_jugador_activo` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora_comienzo` time NOT NULL,
+  `hora_actual` time NOT NULL,
+  `hora_finalizacion` time DEFAULT NULL,
+  `inicio` datetime NOT NULL,
+  `fin` datetime DEFAULT NULL,
+  `estado` enum('en curso','finalizada') NOT NULL,
+  `total_rondas` int(11) NOT NULL,
+  PRIMARY KEY (`id_partida`),
+  KEY `id_jugador1` (`id_jugador1`),
+  KEY `id_jugador2` (`id_jugador2`),
+  KEY `id_jugador_activo` (`id_jugador_activo`),
+  CONSTRAINT `partida_ibfk_1` FOREIGN KEY (`id_jugador1`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `partida_ibfk_2` FOREIGN KEY (`id_jugador2`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `partida_ibfk_3` FOREIGN KEY (`id_jugador_activo`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`id_jugador1` <> `id_jugador2`),
+  CONSTRAINT `CONSTRAINT_2` CHECK (`id_jugador_activo` in (`id_jugador1`,`id_jugador2`)),
+  CONSTRAINT `CONSTRAINT_3` CHECK (`total_rondas` between 2 and 20 and `total_rondas` MOD 2 = 0)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `partida`
+--
+
+LOCK TABLES `partida` WRITE;
+/*!40000 ALTER TABLE `partida` DISABLE KEYS */;
+INSERT INTO `partida` (`id_partida`, `id_jugador1`, `id_jugador2`, `id_jugador_activo`, `fecha`, `hora_comienzo`, `hora_actual`, `hora_finalizacion`, `inicio`, `fin`, `estado`, `total_rondas`) VALUES (1,2,3,2,'2026-09-20','10:00:00','10:04:30','10:04:30','2026-09-20 10:00:00','2026-09-20 10:04:30','finalizada',4),(2,2,4,2,'2026-10-15','18:00:00','18:06:00','18:06:00','2026-10-15 18:00:00','2026-10-15 18:06:00','finalizada',4),(3,3,4,3,'2026-10-16','22:00:00','22:07:15','22:07:15','2026-10-16 22:00:00','2026-10-16 22:07:15','finalizada',4),(4,2,3,2,'2026-11-01','23:59:00','00:03:00','00:03:00','2026-11-01 23:59:00','2026-11-02 00:03:00','finalizada',4);
+/*!40000 ALTER TABLE `partida` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pregunta`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pregunta` (
+  `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
+  `id_categoria` int(11) NOT NULL,
+  `texto` varchar(500) NOT NULL,
+  `respuesta_correcta` varchar(250) NOT NULL,
+  `dificultad` enum('facil','medio','dificil') NOT NULL,
+  PRIMARY KEY (`id_pregunta`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pregunta`
+--
+
+LOCK TABLES `pregunta` WRITE;
+/*!40000 ALTER TABLE `pregunta` DISABLE KEYS */;
+INSERT INTO `pregunta` (`id_pregunta`, `id_categoria`, `texto`, `respuesta_correcta`, `dificultad`) VALUES (1,1,'¿Cuantos jugadores por equipo comienzan un partido de futbol?','11','facil'),(2,1,'¿Que deporte se juega con una raqueta y una pelota amarilla?','Tenis','facil'),(3,1,'¿En que deporte se utiliza un aro y una pelota naranja?','Basquetbol','facil'),(4,1,'¿Cuantos jugadores de un equipo de basquetbol hay en cancha?','5','medio'),(5,1,'¿Que seleccion gano el Mundial de futbol de 1930?','Uruguay','dificil'),(6,1,'¿Cuantos jugadores por equipo hay en cancha en voleibol de sala?','6','medio'),(7,1,'¿Cuantos minutos reglamentarios dura un partido de futbol adulto?','90','facil'),(8,1,'¿Cuantas casillas tiene un tablero de ajedrez?','64','medio'),(9,1,'¿En que ciudad se disputaron los Juegos Olimpicos de 2016?','Rio de Janeiro','dificil'),(10,1,'¿Con que parte del cuerpo puede tocar la pelota el arquero en su propia area?','Manos','facil'),(11,2,'¿Cuanto es 2 + 2?','4','facil'),(12,2,'¿Cual es el planeta en el que vivimos?','Tierra','facil'),(13,2,'¿Cual es la formula quimica del agua?','H2O','facil'),(14,2,'¿Que organo bombea la sangre?','Corazon','facil'),(15,2,'¿Cuanto es 12 multiplicado por 12?','144','medio'),(16,2,'¿Cual es la unidad de fuerza en el Sistema Internacional?','Newton','dificil'),(17,2,'¿Que planeta es conocido como el planeta rojo?','Marte','facil'),(18,2,'¿Cuantos lados tiene un hexagono?','6','medio'),(19,2,'¿Cual es el simbolo quimico del oro?','Au','dificil'),(20,2,'¿Cuanto es la raiz cuadrada de 81?','9','medio'),(21,3,'¿Cual es la capital de Uruguay?','Montevideo','facil'),(22,3,'¿En que continente esta Uruguay?','America','facil'),(23,3,'¿Cual es la capital de Argentina?','Buenos Aires','facil'),(24,3,'¿Que oceano se encuentra al este de Uruguay?','Atlantico','medio'),(25,3,'¿Cual es la capital de Brasil?','Brasilia','medio'),(26,3,'¿En que continente esta Egipto?','Africa','medio'),(27,3,'¿Cual es la capital de Australia?','Canberra','dificil'),(28,3,'¿Cual es la capital de Japon?','Tokio','facil'),(29,3,'¿Cual es el pais de mayor superficie del mundo?','Rusia','dificil'),(30,3,'¿Con que pais limita Uruguay al norte?','Brasil','facil');
+/*!40000 ALTER TABLE `pregunta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ranking`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ranking` (
+  `id_ranking` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `puntos` int(11) NOT NULL DEFAULT 0,
+  `posicion` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id_ranking`),
+  UNIQUE KEY `id_usuario` (`id_usuario`,`id_categoria`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `ranking_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `ranking_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`puntos` >= 0 and `posicion` > 0)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ranking`
+--
+
+LOCK TABLES `ranking` WRITE;
+/*!40000 ALTER TABLE `ranking` DISABLE KEYS */;
+INSERT INTO `ranking` (`id_ranking`, `id_usuario`, `id_categoria`, `puntos`, `posicion`) VALUES (1,2,1,30,1),(2,2,2,10,1),(3,3,1,10,3),(4,3,2,10,1),(5,3,3,10,1),(6,4,1,20,2),(7,4,3,10,1);
+/*!40000 ALTER TABLE `ranking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ronda`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ronda` (
+  `id_partida` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `id_jugador` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `respuesta_dada` varchar(250) NOT NULL,
+  `respuesta_correcta` varchar(250) NOT NULL,
+  `acierto` enum('SI','NO') NOT NULL,
+  `dificultad` enum('facil','medio','dificil') NOT NULL,
+  `puntos` int(11) NOT NULL,
+  PRIMARY KEY (`id_partida`,`numero`),
+  UNIQUE KEY `id_partida` (`id_partida`,`id_pregunta`),
+  KEY `id_jugador` (`id_jugador`),
+  KEY `id_pregunta` (`id_pregunta`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `ronda_ibfk_1` FOREIGN KEY (`id_partida`) REFERENCES `partida` (`id_partida`),
+  CONSTRAINT `ronda_ibfk_2` FOREIGN KEY (`id_jugador`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `ronda_ibfk_3` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
+  CONSTRAINT `ronda_ibfk_4` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`numero` > 0),
+  CONSTRAINT `CONSTRAINT_2` CHECK (`acierto` = 'SI' and `puntos` = 10 or `acierto` = 'NO' and `puntos` = 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ronda`
+--
+
+LOCK TABLES `ronda` WRITE;
+/*!40000 ALTER TABLE `ronda` DISABLE KEYS */;
+INSERT INTO `ronda` (`id_partida`, `numero`, `id_jugador`, `id_pregunta`, `id_categoria`, `respuesta_dada`, `respuesta_correcta`, `acierto`, `dificultad`, `puntos`) VALUES (1,1,2,1,1,'11','11','SI','facil',10),(1,2,3,5,1,'Argentina','Uruguay','NO','dificil',0),(1,3,2,11,2,'4','4','SI','facil',10),(1,4,3,21,3,'Salto','Montevideo','NO','facil',0),(2,1,2,2,1,'Tenis','Tenis','SI','facil',10),(2,2,4,9,1,'Rio de Janeiro','Rio de Janeiro','SI','dificil',10),(2,3,2,15,2,'124','144','NO','medio',0),(2,4,4,25,3,'Brasilia','Brasilia','SI','medio',10),(3,1,3,3,1,'Voleibol','Basquetbol','NO','facil',0),(3,2,4,6,1,'6','6','SI','medio',10),(3,3,3,12,2,'Tierra','Tierra','SI','facil',10),(3,4,4,27,3,'Sidney','Canberra','NO','dificil',0),(4,1,2,7,1,'90','90','SI','facil',10),(4,2,3,8,1,'64','64','SI','medio',10),(4,3,2,13,2,'CO2','H2O','NO','facil',0),(4,4,3,22,3,'America','America','SI','facil',10);
+/*!40000 ALTER TABLE `ronda` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_completo` varchar(100) NOT NULL,
+  `nombre_usuario` varchar(40) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `clave` varchar(150) NOT NULL,
+  `rol` enum('ADMINISTRADOR','JUGADOR') NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `nombre_usuario` (`nombre_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`id_usuario`, `nombre_completo`, `nombre_usuario`, `fecha_nacimiento`, `email`, `clave`, `rol`) VALUES (1,'Administrador de prueba','admin','1990-01-01','admin@example.com','QTdz1jwi+HW5/aJRlMVpjQ==:r0FpTyoMZvTJMpJUkwdgZUf8gW4WmZu6QqKNuG8g5Gs=','ADMINISTRADOR'),(2,'Ana de prueba','ana','2008-05-21','ana@example.com','VZN8wi+ZZGV9ZEtLDGZNGg==:0aWdITrJR+8wyUa0cVLxTRE9vGPpLs32C667Kt54WFA=','JUGADOR'),(3,'Bruno de prueba','bruno','2007-09-10','bruno@example.com','PWyEhJj8sfalkbN45Nee1w==:29MIGl/tuCr8Adiu8bP+OgzTpDFGE/eIx1VBm330Cls=','JUGADOR'),(4,'Carla de prueba','carla','2008-03-15','carla@example.com','RJ1qz9Phwwx8Jx5Fy0dPUA==:rAQ3D53QkPlmzMtm08kMBEYh3INXEdA+YpISC1NuHvk=','JUGADOR');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-11-07 14:47:36
+
+
+-- CONSULTAS DEL PROYECTO
+
+USE respondapp_basico;
+
+-- 1. Cantidad de preguntas dificiles sobre Deportes.
+SELECT COUNT(*) AS preguntas_dificiles_de_deportes
+FROM pregunta p JOIN categoria c ON c.id_categoria=p.id_categoria
+WHERE LOWER(c.nombre)='deportes' AND p.dificultad='dificil';
+
+-- 2. Minutos de una partida finalizada. Incluye cambios de dia.
+SET @partida=1;
+SELECT id_partida, ROUND(TIMESTAMPDIFF(SECOND,inicio,fin)/60.0,2) AS minutos
+FROM partida WHERE id_partida=@partida AND estado='finalizada';
+
+-- 3. Puntos historicos del jugador (incluye partidas en curso).
+SET @jugador=2;
+SELECT u.nombre_usuario,COALESCE(SUM(r.puntos),0) AS puntos_historial
+FROM usuario u LEFT JOIN ronda r ON r.id_jugador=u.id_usuario
+WHERE u.id_usuario=@jugador AND u.rol='JUGADOR'
+GROUP BY u.id_usuario,u.nombre_usuario;
+
+-- 4. La consigna dice 'rondas con partidas faciles'. Como la dificultad
+-- pertenece a la pregunta, contamos rondas con pregunta facil.
+SELECT COUNT(*) AS rondas_con_preguntas_faciles FROM ronda WHERE dificultad='facil';
+
+-- 5. Periodos mensuales ordenados por cantidad de partidas iniciadas.
+-- El primer resultado indica el periodo de mayor frecuencia; se ven los empates.
+SELECT DATE_FORMAT(inicio,'%Y-%m') AS periodo,COUNT(*) AS partidas
+FROM partida GROUP BY DATE_FORMAT(inicio,'%Y-%m') ORDER BY partidas DESC,periodo;
+
+-- 6. Participaciones por jugador, incluyendo ambos lugares de la partida.
+SELECT u.nombre_usuario,COUNT(p.id_partida) AS juegos
+FROM usuario u LEFT JOIN partida p ON u.id_usuario=p.id_jugador1 OR u.id_usuario=p.id_jugador2
+WHERE u.rol='JUGADOR'
+GROUP BY u.id_usuario,u.nombre_usuario ORDER BY juegos DESC,u.nombre_usuario;
